@@ -4,7 +4,10 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
+
 	"github.com/jacobdam/go2do/app/datastore"
+	"github.com/jacobdam/go2do/config"
 )
 
 type AppError struct {
@@ -18,23 +21,61 @@ type App struct {
 	Env       string
 }
 
-func NewApp() (app *App, err error) {
-	h := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello world!"))
-	})
+func NewApp(env string, port string) (app *App, err error) {
+	app = &App{Port: port, Env: env}
+	e := app.createDatastore()
+	if e != nil {
+		err = AppError{e}
+		return
+	}
 
-	app = &App{Handler: h}
+	e = app.createRouter()
+	if e != nil {
+		err = AppError{e}
+		return
+	}
 	return
 }
 
 func (app *App) Run() {
-	e := http.ListenAndServe(":"+app.Port, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello world!"))
-	}))
+	log.Println("Start listening on :" + app.Port)
+	log.Println(app)
+	e := http.ListenAndServe(":"+app.Port, app.Handler)
 
 	if e != nil {
 		log.Fatal("Cannot start app: ", e.Error())
-	} else {
-		log.Println("Listening on :" + app.Port)
 	}
+}
+
+func GetDS(c *gin.Context) *datastore.DataStore {
+	ds, _ := c.Get("ds")
+
+	return ds.(*datastore.DataStore)
+}
+
+func (app *App) createDatastore() error {
+	dsConf := config.DB[app.Env]
+	ds, err := datastore.NewDataStore(&dsConf)
+	if err != nil {
+		return AppError{err}
+	}
+
+	app.DataStore = ds
+	return nil
+}
+
+func (app *App) createRouter() error {
+	router := gin.New()
+	router.Use(func(c *gin.Context) {
+		dsCopy := app.DataStore.Copy()
+		defer dsCopy.Close()
+		c.Set("ds", dsCopy)
+		c.Next()
+	})
+
+	router.GET("/", func(c *gin.Context) {
+		c.Writer.WriteString("Hello world!!!")
+	})
+
+	return nil
 }
