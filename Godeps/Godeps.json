@@ -1,0 +1,37 @@
+{
+	"ImportPath": "github.com/jacobdam/go2do",
+	"GoVersion": "go1.6",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "golang.org/x/crypto/bcrypt",
+			"Rev": "5dc8cb4b8a8eb076cbb5a06bc3b8682c15bdbbd3"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "5dc8cb4b8a8eb076cbb5a06bc3b8682c15bdbbd3"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2016.02.04",
+			"Rev": "d90005c5262a3463800497ea5a89aed5fe22c886"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/bson",
+			"Comment": "r2016.02.04",
+			"Rev": "d90005c5262a3463800497ea5a89aed5fe22c886"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/sasl",
+			"Comment": "r2016.02.04",
+			"Rev": "d90005c5262a3463800497ea5a89aed5fe22c886"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/scram",
+			"Comment": "r2016.02.04",
+			"Rev": "d90005c5262a3463800497ea5a89aed5fe22c886"
+		}
+	]
+}
