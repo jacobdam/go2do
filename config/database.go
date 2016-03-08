@@ -3,11 +3,11 @@ package config
 import (
 	"os"
 
-	"github.com/jacobdam/go2do/core"
+	"github.com/jacobdam/go2do/app/datastore"
 )
 
-var DB = map[string]core.DSConfig{
-	"development": core.NewDSConfig("localhost/go2do"),
-	"test":        core.NewDSConfig("localhost/go2do_test"),
-	"production":  core.NewDSConfig(os.Getenv("MONGODB_URI")),
+var DB = map[string]datastore.DSConfig{
+	"development": datastore.NewDSConfig("localhost/go2do"),
+	"test":        datastore.NewDSConfig("localhost/go2do_test"),
+	"production":  datastore.NewDSConfig(os.Getenv("MONGODB_URI")),
 }

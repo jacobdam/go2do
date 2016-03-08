@@ -28,8 +28,13 @@ func NewApp() (app *App, err error) {
 }
 
 func (app *App) Run() {
-	log.Println("Start listening on :" + app.Port)
-	http.ListenAndServe(":"+app.Port, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	e := http.ListenAndServe(":"+app.Port, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello world!"))
 	}))
+
+	if e != nil {
+		log.Fatal("Cannot start app: ", e.Error())
+	} else {
+		log.Println("Listening on :" + app.Port)
+	}
 }

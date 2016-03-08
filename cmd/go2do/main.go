@@ -5,6 +5,7 @@ import (
 
 	"github.com/jacobdam/go2do/app"
 	"golang.org/x/crypto/bcrypt"
+	_ "gopkg.in/mgo.v2"
 )
 
 func f(pw string) string {

@@ -2,7 +2,7 @@
 	"ImportPath": "github.com/jacobdam/go2do",
 	"GoVersion": "go1.6",
 	"Packages": [
-		"./..."
+		"./cmd/..."
 	],
 	"Deps": [
 		{
