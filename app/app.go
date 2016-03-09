@@ -39,18 +39,11 @@ func NewApp(env string, port string) (app *App, err error) {
 
 func (app *App) Run() {
 	log.Println("Start listening on :" + app.Port)
-	log.Println(app)
 	e := http.ListenAndServe(":"+app.Port, app.Handler)
 
 	if e != nil {
 		log.Fatal("Cannot start app: ", e.Error())
 	}
-}
-
-func GetDS(c *gin.Context) *datastore.DataStore {
-	ds, _ := c.Get("ds")
-
-	return ds.(*datastore.DataStore)
 }
 
 func (app *App) createDatastore() error {
@@ -73,9 +66,8 @@ func (app *App) createRouter() error {
 		c.Next()
 	})
 
-	router.GET("/", func(c *gin.Context) {
-		c.Writer.WriteString("Hello world!!!")
-	})
+	configRoutes(router)
 
+	app.Handler = router
 	return nil
 }

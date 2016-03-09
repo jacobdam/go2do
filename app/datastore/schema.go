@@ -1,6 +1,8 @@
 package datastore
 
-type ObjectId string
+import "gopkg.in/mgo.v2/bson"
+
+type ObjectId bson.ObjectId
 
 type Token struct {
 	token     string
@@ -9,10 +11,10 @@ type Token struct {
 }
 
 type Todo struct {
-	Id          string
-	ListId      ObjectId
-	Title       string
-	IsCompleted bool
+	Id          bson.ObjectId `json:"id" bson:"_id"`
+	ListId      ObjectId      `json:"list_id" binding:"required"`
+	Title       string        `json:"title"`
+	IsCompleted bool          `json:"is_completed"`
 }
 
 type TodoList struct {

@@ -2,10 +2,20 @@ package datastore
 
 import "golang.org/x/crypto/bcrypt"
 
-func (ds *DataStore) CreateUser(ur *UserRegistration) *User {
-	pwDigest, _ := bcrypt.GenerateFromPassword([]byte(ur.Password), 0)
-	user := User{Username: ur.Username, PasswordDigest: string(pwDigest)}
-	ds.DB().C("users").Insert(user)
+func genPwDigest(pw string) string {
+	b, _ := bcrypt.GenerateFromPassword([]byte(pw), 0)
 
-	return &user
+	return string(b)
+}
+
+func (ds *DataStore) CreateUser(ur *UserRegistration) (user *User, err error) {
+	u := User{Username: ur.Username, PasswordDigest: genPwDigest(ur.Password)}
+	e := ds.DB().C("users").Insert(&u)
+	if e != nil {
+		err = DSError{e}
+		return
+	}
+
+	user = &u
+	return
 }
