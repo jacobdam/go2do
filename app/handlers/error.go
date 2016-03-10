@@ -17,6 +17,6 @@ type ErrorResponse struct {
 
 func renderError(c *gin.Context, err error) {
 	res := ErrorResponse{ResponseError{Message: err.Error()}}
-	log.Print(res)
+	log.Println(err)
 	c.JSON(500, res)
 }
