@@ -1,10 +1,10 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/jacobdam/go2do/app"
-	"github.com/jacobdam/go2do/app/datastore"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -20,11 +20,14 @@ func main() {
 	}
 
 	env := os.Getenv("APP_ENV")
-	if port == "" {
+	if env == "" {
 		env = "development"
 	}
-	app, _ := app.NewApp(env, port)
-	ur := datastore.UserRegistration{Username: "phuc.dam", Password: "secret"}
-	app.DataStore.CreateUser(&ur)
+	app, e := app.NewApp(env, port)
+	if e != nil {
+		log.Println(e)
+		return
+	}
+
 	app.Run()
 }

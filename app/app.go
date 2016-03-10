@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 
 	"github.com/jacobdam/go2do/app/datastore"
@@ -59,6 +60,7 @@ func (app *App) createDatastore() error {
 
 func (app *App) createRouter() error {
 	router := gin.New()
+	router.Use(static.Serve("/", static.LocalFile("./static", true)))
 	router.Use(func(c *gin.Context) {
 		dsCopy := app.DataStore.Copy()
 		defer dsCopy.Close()

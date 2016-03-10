@@ -2,9 +2,36 @@
 	"ImportPath": "github.com/jacobdam/go2do",
 	"GoVersion": "go1.6",
 	"Packages": [
-		"./cmd/..."
+		"./cmd/go2do/..."
 	],
 	"Deps": [
+		{
+			"ImportPath": "github.com/gin-gonic/contrib/static",
+			"Rev": "18e1babe51907062f82163197fe8714ce0aad81e"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v1.0rc1-242-g31e4401",
+			"Rev": "31e4401f017591d5e03bdd883449b6e80a305227"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/binding",
+			"Comment": "v1.0rc1-242-g31e4401",
+			"Rev": "31e4401f017591d5e03bdd883449b6e80a305227"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/render",
+			"Comment": "v1.0rc1-242-g31e4401",
+			"Rev": "31e4401f017591d5e03bdd883449b6e80a305227"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "cde632b2dfc9b2747363b9ad6efa68c902944a27"
+		},
+		{
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d"
+		},
 		{
 			"ImportPath": "golang.org/x/crypto/bcrypt",
 			"Rev": "5dc8cb4b8a8eb076cbb5a06bc3b8682c15bdbbd3"
@@ -12,6 +39,15 @@
 		{
 			"ImportPath": "golang.org/x/crypto/blowfish",
 			"Rev": "5dc8cb4b8a8eb076cbb5a06bc3b8682c15bdbbd3"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "6acef71eb69611914f7a30939ea9f6e194c78172"
+		},
+		{
+			"ImportPath": "gopkg.in/go-playground/validator.v8",
+			"Comment": "v8.17.1",
+			"Rev": "014792cf3e266caff1e916876be12282b33059e0"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2",
